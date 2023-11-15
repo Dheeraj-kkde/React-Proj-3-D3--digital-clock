@@ -1,10 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
+
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    // timer updation logic
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="App">
-      Hello
+      <div className="elementcontainer">
+        <h1>Digital Clock</h1>
+        <div className="timeparent">
+          <div className="timecontainer">
+            {/* print the string prettily */}
+            <span className="time">{time.toLocaleTimeString()}</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
